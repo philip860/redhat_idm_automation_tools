@@ -1,0 +1,15 @@
+---
+- name: Create IdM groups
+  hosts: idm
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Ensure IdM groups exist
+      freeipa.ansible_freeipa.ipagroup:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item.name }}"
+        description: "{{ item.description | default(omit) }}"
+        state: present
+      loop: "{{ idm_groups }}"

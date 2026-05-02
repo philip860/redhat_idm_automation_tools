@@ -1,0 +1,5 @@
+---
+- import_playbook: 01-create-groups.yml
+- import_playbook: 02-create-users.yml
+- import_playbook: 03-create-host-principals.yml
+- import_playbook: 04-create-host-services.yml

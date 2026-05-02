@@ -1,0 +1,17 @@
+---
+- name: Create IdM host principals
+  hosts: idm
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Ensure IdM host entries exist
+      freeipa.ansible_freeipa.ipahost:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item.name }}"
+        ip_address: "{{ item.ip_address | default(omit) }}"
+        description: "{{ item.description | default(omit) }}"
+        force: true
+        state: present
+      loop: "{{ idm_hosts }}"

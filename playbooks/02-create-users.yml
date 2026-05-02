@@ -1,0 +1,29 @@
+---
+- name: Create IdM users and assign groups
+  hosts: idm
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Ensure IdM users exist
+      freeipa.ansible_freeipa.ipauser:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item.name }}"
+        first: "{{ item.first }}"
+        last: "{{ item.last }}"
+        password: "{{ item.password }}"
+        email: "{{ item.email | default(omit) }}"
+        state: present
+      loop: "{{ idm_users }}"
+
+    - name: Add users to IdM groups
+      freeipa.ansible_freeipa.ipagroup:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item.1 }}"
+        user:
+          - "{{ item.0.name }}"
+        action: member
+        state: present
+      loop: "{{ idm_users | subelements('groups') }}"

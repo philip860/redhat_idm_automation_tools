@@ -1,0 +1,14 @@
+---
+- name: Create IdM services for hosts
+  hosts: idm
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Ensure IdM service principals exist
+      freeipa.ansible_freeipa.ipaservice:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item.name }}"
+        state: present
+      loop: "{{ idm_services }}"

@@ -1,0 +1,36 @@
+---
+ipaadmin_principal: admin
+ipaadmin_password: "{{ vault_ipaadmin_password }}"
+
+idm_users:
+  - name: jsmith
+    first: John
+    last: Smith
+    password: "{{ vault_jsmith_password }}"
+    email: jsmith@lab.duncan-networks.com
+    groups:
+      - linux-admins
+
+  - name: appsvc
+    first: App
+    last: Service
+    password: "{{ vault_appsvc_password }}"
+    email: appsvc@lab.duncan-networks.com
+    groups:
+      - app-team
+
+idm_groups:
+  - name: linux-admins
+    description: Linux administrators
+
+  - name: app-team
+    description: Application support team
+
+idm_hosts:
+  - name: app01.lab.duncan-networks.com
+    ip_address: 10.0.0.50
+    description: Application host 01
+
+idm_services:
+  - name: HTTP/app01.lab.duncan-networks.com
+  - name: ldap/app01.lab.duncan-networks.com
