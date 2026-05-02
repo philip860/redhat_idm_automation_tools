@@ -1,0 +1,2 @@
+[idm]
+idm.lab.duncan-networks.com ansible_host=10.0.0.28 ansible_user=root
