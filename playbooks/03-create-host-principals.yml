@@ -1,6 +1,6 @@
 ---
 - name: Create IdM host principals
-  hosts: idm
+  hosts: idm.lab.duncan-networks.com
   become: true
   gather_facts: false
 
