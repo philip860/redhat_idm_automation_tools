@@ -1,0 +1,20 @@
+---
+ipaadmin_principal: admin
+ipaadmin_password: "{{ vault_ipaadmin_password }}"
+
+idm_users:
+  - name: jsmith
+    first: John
+    last: Smith
+    password: "{{ vault_jsmith_password }}"
+    email: jsmith@lab.duncan-networks.com
+    groups:
+      - linux-admins
+
+  - name: appsvc
+    first: App
+    last: Service
+    password: "{{ vault_appsvc_password }}"
+    email: appsvc@lab.duncan-networks.com
+    groups:
+      - app-team
