@@ -1,8 +1,13 @@
 ---
 - name: Create IdM groups
-  hosts: idm
+  hosts: idm.lab.duncan-networks.com
   become: true
   gather_facts: false
+
+  vars_files:
+    - ../group_vars/all.yml
+    - ../group_vars/all/vault.yml
+
 
   tasks:
     - name: Ensure IdM groups exist
